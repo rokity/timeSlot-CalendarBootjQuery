@@ -19,8 +19,7 @@
 <!-- Circle finish -->
 
 <!-- Slider Part -->
-
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <link href="plugin/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <!-- Slider part finish -->
 
 
@@ -79,25 +78,19 @@
     <script src="plugin/jqueryui/jquery-ui.js"></script>
 <!-- End part of jQuery & Bootstrap scripts -->
 
-
+<!-- DataJS -->
+<script src="plugin/datajs/date.js" ></script>
+<!-- Finish DataJS -->
 
 
 <script language="javascript">
 $(function(){
-var weekabbrs = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab','Dom'];
-var d = new Date();
-    var n = d.getDay();
-    var n_g=d.getDate();
-    var n_m = d.getMonth();
-    var y=d.getFullYear();
-    $.get('data/months.txt',  function(data) {
-        var array=data.split(",");
-        $("#center").text(array[n_m]);
-    });
-    var count=daysInMonth(n_m+1,y);
-  //  console.log(n_m);
-  //  console.log(n_g);
-  //  console.log(weekabbrs[n-1]);
+//var weekabbrs = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab','Dom'];
+var months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+
+
+        $("#center").text(Date.today().getMonthName());
+
 
   $( "#slider" ).slider({
     range: true,
@@ -135,7 +128,10 @@ $("#right").click(function(event) {
 
 
 var month=$(this).prev(0).children(0).text();
-calcNextOrPrevMonth(month,"r");
+var number=Date.getMonthNumberFromName(month)+1;
+if((number/12)>=1)
+number=0;
+  $("#center").text(months[number]);
 
 });
 
@@ -144,7 +140,10 @@ calcNextOrPrevMonth(month,"r");
 $("#left").click(function(event) {
 
 var month=$(this).next(0).children(0).text();
-calcNextOrPrevMonth(month,"l");
+var number=Date.getMonthNumberFromName(month)-1;
+if(number<0)
+number=11;
+  $("#center").text(months[number]);
 
 
 
@@ -152,50 +151,7 @@ calcNextOrPrevMonth(month,"l");
 
 
 });
-function calcNextOrPrevMonth(month,arrow){
 
-
-  $.get('data/months.txt',  function(data) {
-      var array=data.split(",");
-
-      $.each(array,function(index, el) {
-
-        if(month==el){
-          if(arrow=="r"){
-            if(index==11){
-            index=0;
-            }
-            else{
-              index++;
-            }
-
-            $("#center").text(array[index]);
-            return false;
-          }
-          else {
-            if(index==0){
-            index=11;
-            }
-            else{
-              index--;
-            }
-
-            $("#center").text(array[index]);
-            return false;
-
-          }
-        }
-
-      });
-
-
-  });
-
-
-}
-function daysInMonth(month,year) {
-    return new Date(year, month, 0).getDate();
-}
 
 </script>
 
