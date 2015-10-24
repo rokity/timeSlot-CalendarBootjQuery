@@ -1,0 +1,205 @@
+<html>
+<head>
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Calendario</title>
+
+
+  <!-- Bootstrap -->
+  <link href="plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Finish Bootstrap -->
+
+
+<!-- Circle CSS -->
+  <link href="plugin/css-percentage-circle-master/css/circle.css" rel="stylesheet">
+<!-- Circle finish -->
+
+<!-- Slider Part -->
+
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<!-- Slider part finish -->
+
+
+<!-- CSS -->
+  <link href="css/main.css" rel="stylesheet" type="text/css"></link>
+  <!-- Finish CSS -->
+
+
+
+</head>
+<body >
+
+
+
+
+
+
+
+<div id="orari" class="row center-block block">
+
+
+  <h2><span id="first_label" class="label center-block">Fascia Oraria</span></h2></br>
+  <div class="col-xs-1"><button  class="btn btn-circle btn-danger btn-xl btn-responsive" >00.00</button></div>
+  <div class="col-xs-9"><div id="slider" ></div></div>
+  <div class="col-xs-1"><button  class="btn btn-circle btn-danger btn-xl btn-responsive" >24.00</button></div>
+
+
+
+</div>
+
+<div id="mese" class="row center-block red">
+  <div id="left" class="column column_left col-xs-1"><button class="btn  btn-danger"><span class="glyphicon glyphicon-menu-left"></span></button></div>
+<h2 class=" column_center col-xs-10"><span id="center" class="label center-block  ">Gennaio</span></h2>
+  <div id="right" class="column column_right col-xs-1"><button class=" btn btn-danger"><span class="glyphicon glyphicon-menu-right"></span></button></div>
+</div>
+
+<div id="giorno" class="row center-block block">
+  <div id="left2" class=" column_left col-xs-1"><button class=" btn "><span class="glyphicon glyphicon-menu-left"></span></button></div>
+  <div id="right2" class=" column_right col-xs-1"><button class=" btn "><span class="glyphicon glyphicon-menu-right"></span></button></div>
+
+</div>
+
+
+
+
+
+
+
+
+</body>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="plugin/jQuery/jquery-2.1.4.min.js"></script>
+  <script src="plugin/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugin/jqueryui/jquery-ui.js"></script>
+<!-- End part of jQuery & Bootstrap scripts -->
+
+
+
+
+<script language="javascript">
+$(function(){
+var weekabbrs = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab','Dom'];
+var d = new Date();
+    var n = d.getDay();
+    var n_g=d.getDate();
+    var n_m = d.getMonth();
+    var y=d.getFullYear();
+    $.get('data/months.txt',  function(data) {
+        var array=data.split(",");
+        $("#center").text(array[n_m]);
+    });
+    var count=daysInMonth(n_m+1,y);
+  //  console.log(n_m);
+  //  console.log(n_g);
+  //  console.log(weekabbrs[n-1]);
+
+  $( "#slider" ).slider({
+    range: true,
+      values: [2,4],
+      min: 0,
+      max: 24,
+      step: 1
+  })
+  .each(function() {
+
+    //
+    // Add labels to slider whose values
+    // are specified by min, max and whose
+    // step is set to 1
+    //
+
+    // Get the options for this slider
+    var opt = $(this);
+
+    // Get the number of possible values
+    var vals = opt.slider('option','max') - opt.slider('option','min');
+
+    // Space out values
+    for (var i = 0; i <= vals; i++) {
+
+      var el = $('<label>'+(i+1)+'</label>').css('left',(i/vals*100)+'%');
+
+      $( "#slider" ).append(el);
+
+    }
+
+  });
+
+$("#right").click(function(event) {
+
+
+var month=$(this).prev(0).children(0).text();
+calcNextOrPrevMonth(month,"r");
+
+});
+
+
+
+$("#left").click(function(event) {
+
+var month=$(this).next(0).children(0).text();
+calcNextOrPrevMonth(month,"l");
+
+
+
+});
+
+
+});
+function calcNextOrPrevMonth(month,arrow){
+
+
+  $.get('data/months.txt',  function(data) {
+      var array=data.split(",");
+
+      $.each(array,function(index, el) {
+
+        if(month==el){
+          if(arrow=="r"){
+            if(index==11){
+            index=0;
+            }
+            else{
+              index++;
+            }
+
+            $("#center").text(array[index]);
+            return false;
+          }
+          else {
+            if(index==0){
+            index=11;
+            }
+            else{
+              index--;
+            }
+
+            $("#center").text(array[index]);
+            return false;
+
+          }
+        }
+
+      });
+
+
+  });
+
+
+}
+function daysInMonth(month,year) {
+    return new Date(year, month, 0).getDate();
+}
+
+</script>
+
+
+
+
+</html>
