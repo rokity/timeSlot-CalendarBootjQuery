@@ -2,23 +2,15 @@
   /**Questo colore riguarda il range della fascia oraria selezionata **/
   background: #FF4C4C;
   }
-
 .red{
-  margin-top: 10px;
-  background-color: #FF4C4C;
-  margin-left: 50px;
-  margin-right:50px;
-}
 
+  background-color: #FF4C4C;
+
+}
 .hidden{
 display: none;
 }
-.block{
-  background-color: #d3d3d3;
 
-  margin-left: 50px;
-  margin-right:50px;
-}
 #first_label{
   	background-color:lightgrey;
 }
