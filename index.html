@@ -68,10 +68,13 @@
 
 <div id="giorni_hidden" class="hidden ">
 <div id="primo" class="hidden ">
+  <div id="1" ></div>
 </div>
 <div id="secondo" class="hidden ">
+  <div id="2" ></div>
 </div>
 <div id="terzo" class="hidden   ">
+  <div id="3" ></div>
 </div>
 </div>
 
@@ -179,11 +182,52 @@ $("#center").fadeOut( function() {
 
 $("#left2").click(function(event) {
   $("#giorni").fadeOut(function() {
+  if($("#giorni").children(0).prop("id")==1){
+
     $("#giorni").empty().fadeIn();
     $("#giorni").append($("#terzo").html()).fadeIn();
+  }else{
+    if($("#giorni").children(0).prop("id")==2){
+
+      $("#giorni").empty().fadeIn();
+      $("#giorni").append($("#primo").html()).fadeIn();
+      }
+      else{
+      if($("#giorni").children(0).prop("id")==3){
+
+        $("#giorni").empty().fadeIn();
+        $("#giorni").append($("#secondo").html()).fadeIn();
+        }
+        }
+      }
+
   });
 
 });
+$("#right2").click(function(event) {
+  $("#giorni").fadeOut(function() {
+  if($("#giorni").children(0).prop("id")==1){
+
+    $("#giorni").empty().fadeIn();
+    $("#giorni").append($("#secondo").html()).fadeIn();
+  }else{
+    if($("#giorni").children(0).prop("id")==2){
+
+      $("#giorni").empty().fadeIn();
+      $("#giorni").append($("#terzo").html()).fadeIn();
+      }
+      else{
+      if($("#giorni").children(0).prop("id")==3){
+
+        $("#giorni").empty().fadeIn();
+        $("#giorni").append($("#primo").html()).fadeIn();
+        }
+        }
+      }
+
+  });
+});
+
 });
 function daysInMonth(month,year) {
    return new Date(year, month, 0).getDate();
@@ -192,14 +236,14 @@ function load_days(first_day,count_days){
 for(var i=1;i<=count_days;i++){
 if(i<=10)
 {
-  $("#primo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#1").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
 }
 if(i>10&&i<=20)
 {
-  $("#secondo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#2").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
@@ -207,7 +251,7 @@ if(i>10&&i<=20)
 }
 if(i>20&&i<=31)
 {
-  $("#terzo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#3").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
