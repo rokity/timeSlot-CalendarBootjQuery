@@ -50,21 +50,29 @@
 
 </div>
 
-<div id="mese" class="row center-block red">
-  <div id="left" class="column column_left col-xs-1"><button class="btn  btn-danger"><span class="glyphicon glyphicon-menu-left"></span></button></div>
-<h2 class=" column_center col-xs-10"><span id="center" class="label center-block  ">Gennaio</span></h2>
-  <div id="right" class="column column_right col-xs-1"><button class=" btn btn-danger"><span class="glyphicon glyphicon-menu-right"></span></button></div>
+<div id="mese" class="row center-block red row-eq-height">
+<button id="left" class="btn  btn-danger pull-left col-xs-1"><span class="glyphicon glyphicon-menu-left"></span></button>
+<h2 class=" center-block col-xs-10"><span id="center" class="label center-block  ">Gennaio</span></h2>
+  <button id="right" class=" btn btn-danger pull-right col-xs-1"><span class="glyphicon glyphicon-menu-right"></span></button>
 </div>
 
-<div id="giorno" class="row center-block jumbotron">
-  <div id="left2" class=" column_left col-xs-1"><button class=" btn "><span class="glyphicon glyphicon-menu-left"></span></button></div>
-  <div id="giorni" class="column_center col-xs-10">
+<div id="giorno" class="row center-block jumbotron row-eq-height">
+
+<button id="left2"   class=" btn pull-left col-xs-1"><span class="glyphicon glyphicon-menu-left"></span></button>
+  <div id="giorni" class="center-block col-xs-10  btn-group  btn-group-justified" role="group"></div>
+<button id="right2" class=" btn pull-right col-xs-1 "><span class="glyphicon glyphicon-menu-right"></span></button>
 
 
+</div>
 
-  </div>
-  <div id="right2" class=" column_right col-xs-1"><button class=" btn "><span class="glyphicon glyphicon-menu-right"></span></button></div>
 
+<div id="giorni_hidden" class="hidden ">
+<div id="primo" class="hidden ">
+</div>
+<div id="secondo" class="hidden ">
+</div>
+<div id="terzo" class="hidden   ">
+</div>
 </div>
 
 
@@ -100,7 +108,10 @@ var months = ["January","February","March","April","May","June","July","August",
         var d = new Date();
         var number_of_day=Date.getDaysInMonth(d.getFullYear(),d.getMonth());
         var first_day = new Date(d.getFullYear(), d.getMonth(), 1).getDay()-1;
-          getDaysView(first_day,10);
+        load_days(first_day,number_of_day);
+        $("#giorni").append($("#primo").html());
+        //  getDaysView(first_day,10);
+
 
 
 
@@ -143,7 +154,9 @@ var month=$(this).prev(0).children(0).text();
 var number=Date.getMonthNumberFromName(month)+1;
 if((number/12)>=1)
 number=0;
-  $("#center").text(months[number]);
+$("#center").fadeOut( function() {
+  $(this).text(months[number]).fadeIn();
+});
 
 });
 
@@ -155,23 +168,50 @@ var month=$(this).next(0).children(0).text();
 var number=Date.getMonthNumberFromName(month)-1;
 if(number<0)
 number=11;
-  $("#center").text(months[number]);
+$("#center").fadeOut( function() {
+  $(this).text(months[number]).fadeIn();
+});
+
 
 
 
 });
 
+$("#left2").click(function(event) {
+  $("#giorni").fadeOut(function() {
+    $("#giorni").empty().fadeIn();
+    $("#giorni").append($("#terzo").html()).fadeIn();
+  });
 
+});
 });
 function daysInMonth(month,year) {
    return new Date(year, month, 0).getDate();
 }
-function getDaysView(first_day,count_days){
+function load_days(first_day,count_days){
 for(var i=1;i<=count_days;i++){
-  $("#giorni").append('<button  type="button" class="btn btn-default" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></button>');
+if(i<=10)
+{
+  $("#primo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
+}
+if(i>10&&i<=20)
+{
+  $("#secondo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  first_day++;
+  if(first_day==7)
+  first_day=0;
+
+}
+if(i>20&&i<=31)
+{
+  $("#terzo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  first_day++;
+  if(first_day==7)
+  first_day=0;
+}
 }
 }
 
