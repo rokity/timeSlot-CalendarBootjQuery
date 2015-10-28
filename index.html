@@ -30,7 +30,7 @@
 
 
 </head>
-<body class="container">
+<body class="container-fluid">
 
 
 
@@ -41,22 +41,22 @@
 <div id="orari" class="row center-block jumbotron">
 
 
-  <div class="page-header"><h2><span id="first_label" class="label center-block">Fascia Oraria</span></h2></div></br>
-  <div class="col-xs-1"><button  class="btn btn-circle btn-danger btn-xl btn-responsive" >00.00</button></div>
-  <div class="col-xs-9"><div id="slider" class="form-control"></div></div>
-  <div class="col-xs-1"><button  class="btn btn-circle btn-danger btn-xl btn-responsive" >24.00</button></div>
+  <div class="page-header"><h2 ><span id="first_label" class="label label-danger center-block">Fascia Oraria</span></h2></div></br>
+  <button  class="btn btn-circle btn-danger btn-xl btn-responsive col-md-1 pull-left" ><h4 class="text-left">00.00</h3></button>
+  <div class="col-md-9 col-md-offset-1  "><div id="slider" class="form-control"></div></div>
+  <button  class="btn btn-circle btn-danger  btn-xl btn-responsive col-md-1 pull-right" ><h4 class="text-left">24.00</h3></button>
 
 
 
 </div>
 
-<div id="mese" class="row center-block red row-eq-height">
+<div id="mese" class="row-fluid center-block label-danger row-eq-height">
 <button id="left" class="btn  btn-danger pull-left col-xs-1"><span class="glyphicon glyphicon-menu-left"></span></button>
 <h2 class=" center-block col-xs-10"><span id="center" class="label center-block  ">Gennaio</span></h2>
   <button id="right" class=" btn btn-danger pull-right col-xs-1"><span class="glyphicon glyphicon-menu-right"></span></button>
 </div>
 
-<div id="giorno" class="row center-block jumbotron row-eq-height">
+<div id="giorno" class="row-fluid center-block jumbotron row-eq-height">
 
 <button id="left2"   class=" btn pull-left col-xs-1"><span class="glyphicon glyphicon-menu-left"></span></button>
   <div id="giorni" class="center-block col-xs-10  btn-group  btn-group-justified" role="group"></div>
@@ -100,8 +100,8 @@
 
 
 <script language="javascript">
-var weekabbrs = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab','Dom'];
-var weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'];
+var weekabbrs = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'];
+//var weekabbrs = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'];
 $(function(){
 
 var months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -190,7 +190,7 @@ $("#center").fadeOut( function() {
   var first_day = new Date(d.getFullYear(), Date.getMonthNumberFromName(months[number]), 1).getDay()-1;
   if(first_day==-1)
   first_day=6;
-  
+
   $("#primo").empty();
   $("#secondo").empty();
   $("#terzo").empty();
@@ -264,14 +264,14 @@ function load_days(first_day,count_days){
 for(var i=1;i<=count_days;i++){
 if(i<=10)
 {
-  $("#primo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#primo").append('<a  type="button" class="btn btn-default  col-md-1 text-center" role="button" aria-label="Right Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weekabbrs[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
 }
 if(i>10&&i<=20)
 {
-  $("#secondo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#secondo").append('<a  type="button" class="btn btn-default  col-md-1 text-center" role="button" aria-label="Right Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weekabbrs[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
@@ -279,7 +279,7 @@ if(i>10&&i<=20)
 }
 if(i>20&&i<=31)
 {
-  $("#terzo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#terzo").append('<a  type="button" class="btn btn-default  col-md-1 text-center" role="button" aria-label="Right Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weekabbrs[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
