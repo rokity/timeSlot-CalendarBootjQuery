@@ -68,13 +68,13 @@
 
 <div id="giorni_hidden" class="hidden ">
 <div id="primo" class="hidden ">
-  <div id="1" ></div>
+
 </div>
 <div id="secondo" class="hidden ">
-  <div id="2" ></div>
+
 </div>
 <div id="terzo" class="hidden   ">
-  <div id="3" ></div>
+
 </div>
 </div>
 
@@ -112,7 +112,7 @@ var months = ["January","February","March","April","May","June","July","August",
         var number_of_day=Date.getDaysInMonth(d.getFullYear(),d.getMonth());
         var first_day = new Date(d.getFullYear(), d.getMonth(), 1).getDay()-1;
         load_days(first_day,number_of_day);
-        $("#giorni").append($("#primo").html());
+      //  $("#giorni").append($("#primo").html());
         //  getDaysView(first_day,10);
 
 
@@ -155,10 +155,22 @@ $("#right").click(function(event) {
 
 var month=$(this).prev(0).children(0).text();
 var number=Date.getMonthNumberFromName(month)+1;
+
 if((number/12)>=1)
 number=0;
 $("#center").fadeOut( function() {
   $(this).text(months[number]).fadeIn();
+  var d = new Date();
+  var number_of_day=Date.getDaysInMonth(d.getFullYear(),Date.getMonthNumberFromName(months[number]));
+  var first_day = new Date(d.getFullYear(), Date.getMonthNumberFromName(months[number]), 1).getDay()-1;
+  if(first_day==-1)
+  first_day=6;
+
+
+  $("#primo").empty();
+  $("#secondo").empty();
+  $("#terzo").empty();
+  load_days(first_day,number_of_day);
 });
 
 });
@@ -173,6 +185,18 @@ if(number<0)
 number=11;
 $("#center").fadeOut( function() {
   $(this).text(months[number]).fadeIn();
+  var d = new Date();
+  var number_of_day=Date.getDaysInMonth(d.getFullYear(),Date.getMonthNumberFromName(months[number]));
+  var first_day = new Date(d.getFullYear(), Date.getMonthNumberFromName(months[number]), 1).getDay()-1;
+  if(first_day==-1)
+  first_day=6;
+  
+  $("#primo").empty();
+  $("#secondo").empty();
+  $("#terzo").empty();
+  load_days(first_day,number_of_day);
+
+
 });
 
 
@@ -182,21 +206,21 @@ $("#center").fadeOut( function() {
 
 $("#left2").click(function(event) {
   $("#giorni").fadeOut(function() {
-  if($("#giorni").children(0).prop("id")==1){
+  if($("#giorni").children(0).prop("id")=="1"){
 
     $("#giorni").empty().fadeIn();
-    $("#giorni").append($("#terzo").html()).fadeIn();
+    $("#giorni").append('<div id="3">'+$("#terzo").html()+'</div>').fadeIn();
   }else{
-    if($("#giorni").children(0).prop("id")==2){
+    if($("#giorni").children(0).prop("id")=="2"){
 
       $("#giorni").empty().fadeIn();
-      $("#giorni").append($("#primo").html()).fadeIn();
+      $("#giorni").append('<div id="1">'+$("#primo").html()+'</div>').fadeIn();
       }
       else{
-      if($("#giorni").children(0).prop("id")==3){
+      if($("#giorni").children(0).prop("id")=="3"){
 
         $("#giorni").empty().fadeIn();
-        $("#giorni").append($("#secondo").html()).fadeIn();
+        $("#giorni").append('<div id="2">'+$("#secondo").html()+'</div>').fadeIn();
         }
         }
       }
@@ -209,18 +233,18 @@ $("#right2").click(function(event) {
   if($("#giorni").children(0).prop("id")==1){
 
     $("#giorni").empty().fadeIn();
-    $("#giorni").append($("#secondo").html()).fadeIn();
+    $("#giorni").append('<div id="2">'+$("#secondo").html()+'</div>').fadeIn();
   }else{
     if($("#giorni").children(0).prop("id")==2){
 
       $("#giorni").empty().fadeIn();
-      $("#giorni").append($("#terzo").html()).fadeIn();
+      $("#giorni").append('<div id="3">'+$("#terzo").html()+'</div>').fadeIn();
       }
       else{
       if($("#giorni").children(0).prop("id")==3){
 
         $("#giorni").empty().fadeIn();
-        $("#giorni").append($("#primo").html()).fadeIn();
+        $("#giorni").append('<div id="2">'+$("#primo").html()+'</div>').fadeIn();
         }
         }
       }
@@ -233,17 +257,21 @@ function daysInMonth(month,year) {
    return new Date(year, month, 0).getDate();
 }
 function load_days(first_day,count_days){
+  $("#primo").empty();
+  $("#secondo").empty();
+  $("#terzo").empty();
+
 for(var i=1;i<=count_days;i++){
 if(i<=10)
 {
-  $("#1").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#primo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
 }
 if(i>10&&i<=20)
 {
-  $("#2").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#secondo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
@@ -251,12 +279,16 @@ if(i>10&&i<=20)
 }
 if(i>20&&i<=31)
 {
-  $("#3").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
+  $("#terzo").append('<a  type="button" class="btn btn-default  " role="button" aria-label="Left Align"><span class="" aria-hidden="true"><h3>'+i+'</h3></br>'+weeks[first_day]+'</span></a>');
   first_day++;
   if(first_day==7)
   first_day=0;
 }
 }
+
+$("#giorni").html(" ").fadeIn();
+$("#giorni").append('<div id="1">'+$("#primo").html()+'</div>').fadeIn();
+
 }
 
 
