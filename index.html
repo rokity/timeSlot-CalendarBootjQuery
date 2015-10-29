@@ -42,9 +42,9 @@
 
 
   <div class="page-header"><h2 ><span id="first_label" class="label label-danger center-block">Fascia Oraria</span></h2></div></br>
-  <button  class="btn btn-circle btn-danger btn-xl btn-responsive col-md-1 pull-left" ><h4 class="text-left">00.00</h3></button>
+  <button  class="btn btn-circle btn-danger btn-xl btn-responsive col-md-1 pull-left" ><h4 id="orario_sinistra" class="text-left">09.00</h3></button>
   <div class="col-md-9 col-md-offset-1  "><div id="slider" class="form-control"></div></div>
-  <button  class="btn btn-circle btn-danger  btn-xl btn-responsive col-md-1 pull-right" ><h4 class="text-left">24.00</h3></button>
+  <button  class="btn btn-circle btn-danger  btn-xl btn-responsive col-md-1 pull-right" ><h4 id="orario_destra" class="text-left">12.00</h3></button>
 
 
 
@@ -120,10 +120,28 @@ var months = ["January","February","March","April","May","June","July","August",
 
   $( "#slider" ).slider({
     range: true,
-      values: [2,4],
+      values: [8,11],
       min: 0,
-      max: 24,
-      step: 1
+      max: 23,
+      step: 1,
+      change:function( event, ui ) {
+        var index = $(ui.handle).index();
+        var value=ui.value+1;
+        value=value+".00";
+            if (index == 1)
+            $("#orario_sinistra").text(value);            //  console.log("sinistro");
+            if (index == 2)
+                  $("#orario_destra").text(value);
+
+
+
+    /*    if($("#slider").children(1).attr("style")==())
+        console.log("sinistra");
+        if($("#slider").children(2).attr("style")==(ui.handle.attr("style")))
+       console.log("destra");*/
+      //  console.log(ui.handle);
+      //  console.log(ui.value);
+      }
   })
   .each(function() {
 
