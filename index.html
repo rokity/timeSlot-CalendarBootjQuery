@@ -1,4 +1,5 @@
 <html>
+
 <head>
 
 
@@ -14,35 +15,46 @@
   <!-- Finish Bootstrap -->
 
 
-<!-- Circle CSS -->
+  <!-- Circle CSS -->
   <link href="plugin/css-percentage-circle-master/css/circle.css" rel="stylesheet">
-<!-- Circle finish -->
+  <!-- Circle finish -->
 
-<!-- Slider Part -->
-  <link href="plugin/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<!-- Slider part finish -->
+  <!-- Slider Part -->
+  <link href="plugin/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <!-- Slider part finish -->
 
 
-<!-- CSS -->
+  <!-- CSS -->
   <link href="css/main.css" rel="stylesheet" type="text/css"></link>
   <!-- Finish CSS -->
 
 
 
 </head>
+
 <body class="container-fluid">
 
 
 
 
+<div id="calendario">
+
+  <div id="title" cal-size="large" cal-color="green" value="Titolo"></div>
+
+</div>
 
 
 
-<div id="orari" class="row center-block jumbotron">
 
 
-  <div class="page-header"><h2 ><span id="first_label" class="label label-danger center-block">Fascia Oraria</span></h2></div></br>
-  <button  class="btn btn-circle btn-danger btn-xl btn-responsive col-md-1 pull-left" ><h4 id="orario_sinistra" class="text-left">09.00</h3></button>
+  <div id="orari" class="row center-block jumbotron">
+
+
+    <div class="page-header">
+      <h2><span id="first_label" class="label label-danger center-block">Fascia Oraria</span></h2></div>
+    </br>
+    <button class="btn btn-circle btn-danger btn-xl btn-responsive col-md-1 pull-left">
+      <h4 id="orario_sinistra" class="text-left">09.00</h3></button>
   <div class="col-md-9 col-md-offset-1  "><div id="slider" class="form-control"></div></div>
   <button  class="btn btn-circle btn-danger  btn-xl btn-responsive col-md-1 pull-right" ><h4 id="orario_destra" class="text-left">12.00</h3></button>
 
@@ -56,7 +68,7 @@
   <button id="right" class=" btn btn-danger pull-right col-xs-1"><span class="glyphicon glyphicon-menu-right"></span></button>
 </div>
 
-<div id="giorno" class="row-fluid center-block jumbotron row-eq-height">
+<div id="giorno" class="row center-block  row-eq-height">
 
 <button id="left2"   class=" btn pull-left col-xs-1"><span class="glyphicon glyphicon-menu-left"></span></button>
   <div id="giorni" class="center-block col-xs-10  btn-group  btn-group-justified" role="group"></div>
@@ -120,20 +132,6 @@ $(function(){
       //  $("#giorni").append($("#primo").html());
         //  getDaysView(first_day,10);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
 
 
@@ -149,5 +147,10 @@ $(function(){
 <script src="js/days.js" ></script>
 <!-- End Of My Personal Functions For Change Months And Days -->
 
+
+
+<!-- My Plugin -->
+<script src="js/plugin.js"></script>
+<!-- End of My Plugin -->
 
 </html>
